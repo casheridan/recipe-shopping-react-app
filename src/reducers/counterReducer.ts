@@ -1,18 +1,23 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 interface CounterState {
     count: number;
 }
 
 const initialState: CounterState = { count: 0 };
 
-type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+        increment: (state) => {
+            state.count + 1;
+        },
+        decrement: (state) => {
+            state.count - 1;
+        },
+    },
+});
 
-export default function counterReducer(state = initialState, action: Action): CounterState {
-    switch(action.type) {
-        case 'INCREMENT':
-            return { count: state.count + 1 };
-        case 'DECREMENT':
-            return { count: state.count - 1};
-        default:
-            return state;
-    }
-}
+export const { increment, decrement } = counterSlice.actions;
+export default counterSlice.reducer;
