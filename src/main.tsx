@@ -3,7 +3,7 @@ import './index.css'
 import App from './App.tsx'
 import { Provider } from 'react-redux'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
-import { store } from './store.ts'
+import { store } from './store/store.ts'
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
