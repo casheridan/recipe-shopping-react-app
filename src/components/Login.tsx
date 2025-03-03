@@ -1,51 +1,77 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { signIn, signUp, signUpGoogle } from '../lib/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../reducers/slices/authSlice';
-import LogoutButton from './LogoutButton';
+import { Button, Input, Icon, VStack, HStack } from '@chakra-ui/react';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  const handleLogin = async () => {
+  const handleLogin = useCallback(async () => {
     try {
-      const user = await signIn(email, password);
-      dispatch(setUser(user));
-      alert('Login successful');
-    } catch (error: any) {
-      alert(error.message);
-    }
-  };
-
-  const handleSignup = async () => {
-    try {
-      const user = await signUp(email, password);
+      const user: any = await signIn(email, password);
       dispatch(setUser(user));
     } catch (error: any) {
       alert(error.message);
     }
-  }
+  }, [email, password, dispatch]);
 
-  const handleLoginGoogle = async () => {
+  const handleSignup = useCallback(async () => {
     try {
-      await signUpGoogle();
+      const user: any = await signUp(email, password);
+      dispatch(setUser(user));
     } catch (error: any) {
       alert(error.message);
     }
-  }
+  }, [email, password, dispatch]);
 
-  return (
-    <div>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleSignup}>Sign Up</button>
-        <button onClick={handleLoginGoogle}>Login With Google</button>
-        <LogoutButton />
-    </div>
-  );
+  const handleLoginGoogle = useCallback(async () => {
+    try {
+      const user: any = await signUpGoogle();
+      dispatch(setUser(user));
+    } catch (error: any) {
+      alert(error.message);
+    }
+  }, [dispatch]);
+
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  }, []);
+
+  const memoizedBox = useMemo(() => (
+    <VStack w={"100%"}>
+      <Input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="Email"
+        w={"75%"}
+      />
+      <Input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        placeholder="Password"
+        w={"75%"}
+      />
+      <HStack>
+        <Button onClick={handleLogin}>Login</Button>
+        <Button onClick={handleSignup}>Sign Up</Button>
+      </HStack>
+      <Icon onClick={handleLoginGoogle}>
+        <FaGoogle />
+      </Icon>
+    </VStack>
+  ), [email, password, handleLogin, handleSignup, handleLoginGoogle, handleEmailChange, handlePasswordChange]);
+
+  return memoizedBox;
 };
 
-export default Login;
+export default memo(Login);

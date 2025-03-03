@@ -1,8 +1,9 @@
+import React from 'react';
 import { signOut } from '../lib/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../reducers/slices/authSlice';
 
-const LogoutButton = () => {
+const LogoutButton: React.FC = () => {
     const dispatch = useDispatch();
 
     const handleLogout = async () => {

@@ -3,8 +3,10 @@ import { Box, Center, Flex, Icon } from '@chakra-ui/react';
 import { HiCalendar, HiHome, HiMiniRectangleStack, HiShoppingCart } from 'react-icons/hi2';
 import { setUser } from '../reducers/slices/authSlice';
 import { signOut } from '../lib/auth';
+import { useDispatch } from 'react-redux';
 
 const BottomBar: React.FC = () => {
+    const dispatch = useDispatch();
 
     const handleLogout = async () => {
         try {
@@ -40,7 +42,3 @@ const BottomBar: React.FC = () => {
 };
 
 export default BottomBar;
-
-function dispatch(arg0: any) {
-    throw new Error('Function not implemented.');
-}
