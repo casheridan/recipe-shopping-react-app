@@ -7,7 +7,7 @@
 4. Redux w/ Redux Toolkit (State Management)
 5. Supabase (Backend BaaS)
 6. Chakra UI (Component System)
-7. HeroIcons (Icon Library)
+7. ReactIcons (Icon Library)
 7. Vitest (Testing Framework)
 8. Million (Linter)
 
