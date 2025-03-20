@@ -4,6 +4,7 @@ import { HiCalendar, HiHome, HiMiniRectangleStack, HiShoppingCart } from 'react-
 import { setUser } from '../reducers/slices/authSlice';
 import { signOut } from '../lib/auth';
 import { useDispatch } from 'react-redux';
+import '../style/components/BottomBar.css';
 
 const BottomBar: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const BottomBar: React.FC = () => {
 
     return(
         <>
-            <Box w={"100%"} pos={"absolute"} bottom={"0"}>
+            <Box w={"100%"} pos={"absolute"} bottom={"0"} left={"0"}>
                 <Center w={"100%"}>
                     <Flex w={"100%"} justify={"space-between"} padding={"40px"} paddingBottom={"20px"}>
                         <Icon fontSize={"40px"}>

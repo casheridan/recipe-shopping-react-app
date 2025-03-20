@@ -5,7 +5,7 @@ import { setUser } from '../reducers/slices/authSlice';
 import { Button, Input, Icon, VStack, HStack } from '@chakra-ui/react';
 import { FaGoogle } from 'react-icons/fa';
 
-const Login = () => {
+const Login = memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -72,6 +72,6 @@ const Login = () => {
   ), [email, password, handleLogin, handleSignup, handleLoginGoogle, handleEmailChange, handlePasswordChange]);
 
   return memoizedBox;
-};
+});
 
 export default memo(Login);
